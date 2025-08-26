@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","4070","should login and create new patient successfully","chromium","Tue Aug 26 08:56:09 PDT 2025","passed","Tue Aug 26 08:56:13 PDT 2025","Patient Creation Test","","",""
