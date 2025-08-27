@@ -20,8 +20,13 @@ class TestHelpers {
   async login(email = null, password = null) {
     const userEmail = email || process.env.EMAIL || users.sully.email;
     const userPassword = password || process.env.PASSWORD || users.sully.password;
-    
+  
+    // login via LoginUtils
     await this.loginUtils.login(userEmail, userPassword);
+  
+    // grant microphone permissions for origin from BASE_URL
+    const baseURL = process.env.BASE_URL || 'https://app.sully.ai';
+    await this.page.context().grantPermissions(['microphone'], { origin: new URL(baseURL).origin });
   }
 
   /**
@@ -54,3 +59,4 @@ class TestHelpers {
 }
 
 module.exports = TestHelpers;
+

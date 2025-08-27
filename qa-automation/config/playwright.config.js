@@ -1,49 +1,45 @@
 require('dotenv').config();
+const path = require('path');
+const { defineConfig, devices } = require('@playwright/test');
 
-module.exports = {
+const micFile = path.resolve(process.env.MIC_WAV || './test_data/audio/headache.wav');
+const baseURL = process.env.BASE_URL || 'https://app.sully.ai';
+
+module.exports = defineConfig({
   testDir: './tests',
-  timeout: 90000,
+  timeout: 90_000,
+  expect: { timeout: 30_000 },
   retries: 1,
   reporter: [
     ['line'],
     ['allure-playwright', {
       detail: true,
-      outputFolder: './reports/allure-results',
+      outputFolder: 'reports/allure-results',
       suiteTitle: false,
-    }]
+    }],
   ],
   use: {
+    baseURL,
     browserName: 'chromium',
-    baseURL: process.env.BASE_URL || 'https://app.sully.ai',
+    headless: true,                      // на время отладки можно поставить false
+    permissions: ['microphone'],         // базовое
     trace: 'on-first-retry',
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
-    permissions: ['microphone'],
     launchOptions: {
       args: [
+        '--use-fake-device-for-media-stream',        // <— добавили
+        `--use-file-for-fake-audio-capture=${micFile}`,
         '--use-fake-ui-for-media-stream',
-        '--autoplay-policy=no-user-gesture-required'
-      ]
-    }
+        '--autoplay-policy=no-user-gesture-required',
+      ],
+    },
   },
-  globalSetup: undefined,
-  globalTeardown: undefined,
   projects: [
     {
       name: 'chromium',
-      use: {
-        browserName: 'chromium',
-      },
+      use: { ...devices['Desktop Chrome'] },
     },
   ],
-  expect: {
-    timeout: 30000,
-  },
-  outputDir: './reports/test-output',
-  // Artifacts configuration
-  artifacts: {
-    screenshots: './reports/screenshots',
-    videos: './reports/videos',
-    traces: './reports/traces',
-  },
-};
+  outputDir: 'reports/test-output',
+});

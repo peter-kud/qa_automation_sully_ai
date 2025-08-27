@@ -16,3 +16,4 @@ const authLocators = {
 };
 
 module.exports = authLocators;
+

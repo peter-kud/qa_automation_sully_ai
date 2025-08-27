@@ -72,3 +72,4 @@ class LoginUtils {
 }
 
 module.exports = LoginUtils;
+

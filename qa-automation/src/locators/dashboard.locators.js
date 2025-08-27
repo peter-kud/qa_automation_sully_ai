@@ -1,19 +1,19 @@
-/**
- * Dashboard page locators
- * TODO: Update data-testid values after DOM inspection
- */
-const dashboardLocators = {
-  // Patient search and creation
-  patientSearchInput: '//input[@placeholder="Search or create patient..."]',
-  createNewPatientBtn: '//span[contains(text(),"Create new patient")]',
-  
-  // Alternative selectors if XPath doesn't work
-  patientSearchInputAlt: 'input[placeholder*="Search or create patient"], input[placeholder*="patient"]',
-  createNewPatientBtnAlt: 'button:has-text("Create new patient"), span:has-text("Create new patient"), .create-patient-btn',
-  
-  // Dashboard elements
-  dashboard: '[data-testid="dashboard"], .dashboard, main',
-  startRecordingBtn: '[data-testid="start-recording-btn"], button:has-text("Start Recording")',
-};
+module.exports = {
+  // Dashboard shell
+  dashboard: 'main, [data-testid*="dashboard"]',
 
-module.exports = dashboardLocators;
+  // Patient search + create
+  patientSearchInput: 'input[placeholder*="Search"], input[placeholder*="patient"]',
+  createNewPatientBtn: '//span[contains(text(),"Create new patient")]',
+
+  // Start In-Person Visit
+  startInPersonBtn: '//span[normalize-space(.)="Start In-Person Visit"]',
+
+  // target the pill text exactly (avoids small red "Recording")
+  recordingPill:    '//span[normalize-space(.)="Recording (Click to Pause)"]',
+  pauseRecordingBtn:'//span[normalize-space(.)="Recording (Click to Pause)"]',
+
+  generateNoteBtn:  '//span[normalize-space(.)="Generate Note"]',
+
+  transcriptArea:   '//textarea[@id="speech-transcript"]',
+};
