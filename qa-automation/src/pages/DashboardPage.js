@@ -1,4 +1,3 @@
-// src/pages/DashboardPage.js
 const ActionUtils = require('../utils/actionUtils');
 const WaitUtils = require('../utils/waitUtils');
 const CommonUtils = require('../utils/commonUtils');

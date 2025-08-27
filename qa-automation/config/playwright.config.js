@@ -21,14 +21,14 @@ module.exports = defineConfig({
   use: {
     baseURL,
     browserName: 'chromium',
-    headless: true,                      // на время отладки можно поставить false
-    permissions: ['microphone'],         // базовое
+    headless: true,
+    permissions: ['microphone'],
     trace: 'on-first-retry',
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
     launchOptions: {
       args: [
-        '--use-fake-device-for-media-stream',        // <— добавили
+        '--use-fake-device-for-media-stream',
         `--use-file-for-fake-audio-capture=${micFile}`,
         '--use-fake-ui-for-media-stream',
         '--autoplay-policy=no-user-gesture-required',
